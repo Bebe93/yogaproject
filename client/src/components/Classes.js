@@ -146,7 +146,7 @@ export default function Classes() {
                   When: {c.day} at {c.time}
                 </p>
                 <p>Where: {c.address}</p>
-                <p>Cost: £{c.price}</p>
+                <p>Cost: €{c.price}</p>
               </div>
               <div className="right">
                 <p>Taught by: {c.instructor}</p>

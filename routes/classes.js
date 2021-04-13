@@ -33,12 +33,6 @@ router.get("/", async function (req, res) {
         searchStmt.push(`WHERE day="${day}"`);
       }
     }
-    if (partner) {
-      if (searchStmt.length > 0) searchStmt.push(`AND partner="${partner}"`);
-      else {
-        searchStmt.push(`WHERE partner="${partner}"`);
-      }
-    }
   }
 
   try {
@@ -46,7 +40,7 @@ router.get("/", async function (req, res) {
     // const response = await db(`SELECT * FROM classes ${searchStmt.join("")};`);
 
     const response = await db(
-      `SELECT c.id, c.name, d.name AS style, c.day, c.time, c.address, c.price, c.image, i.name AS instructor, i.photo FROM classes AS c LEFT JOIN dance_styles AS d ON c.style=d.id LEFT JOIN instructors AS i ON c.instructor=i.id ${searchStmt.join(
+      `SELECT c.id, c.name, d.name AS style, c.day, c.time, c.address, c.price, c.image, i.name AS instructor, i.photo FROM classes AS c LEFT JOIN yoga_styles AS d ON c.style=d.id LEFT JOIN instructors AS i ON c.instructor=i.id ${searchStmt.join(
         ""
       )};`
     );
