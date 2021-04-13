@@ -1,153 +1,163 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 export default function Classes() {
-    let history = useHistory();
-    let pathname = history.location.pathname;
-    let query = history.location.search;
+  let history = useHistory();
+  let pathname = history.location.pathname;
+  let query = history.location.search;
 
-    const [classes, setClasses] = useState([]);
-    const [styles, setStyles] = useState([]);
-    const [selection, setSelection] = useState({
-            "style":"",
-            "partner":"",
-            "day": "" 
-        })
+  const [classes, setClasses] = useState([]);
+  const [styles, setStyles] = useState([]);
+  const [selection, setSelection] = useState({
+    style: "",
+    day: "",
+  });
 
-    const fetchClasses = async () => {
-        let response;
-        if(query !== ""){
-            response = await fetch(`${pathname}${query}`);
-        } else {
-            response = await fetch(`${pathname}`);
-        }
-
-        const data = await response.json();
-        setClasses(data);
+  const fetchClasses = async () => {
+    let response;
+    if (query !== "") {
+      response = await fetch(`${pathname}${query}`);
+    } else {
+      response = await fetch(`${pathname}`);
     }
 
-    const fetchStyles = async () => {
-        const response = await fetch(`/dancestyles`);
-        const data = await response.json();
-        setStyles(data);
+    const data = await response.json();
+    setClasses(data);
+  };
+
+  const fetchStyles = async () => {
+    const response = await fetch(`/yogastyles`);
+    const data = await response.json();
+    setStyles(data);
+  };
+
+  useEffect(() => {
+    console.log(history.location);
+    //test
+    if (query) {
+      setSelection({
+        style: query.charAt(query.length - 1),
+        day: "",
+      });
     }
+    fetchClasses();
+    fetchStyles();
+  }, []);
 
-    useEffect(() => {
-        console.log(history.location)
-        //test
-        if(query){
-            setSelection({
-                "style": query.charAt(query.length-1),
-                "partner":"",
-                "day": ""
-            })
-        }
-        fetchClasses();
-        fetchStyles();
-    }, [])
+  const handleChange = (event) => {
+    const key = event.target.name;
+    const value = event.target.value;
 
-    const handleChange = (event) => {
-        const key =  event.target.name;
-        const value = event.target.value;
+    setSelection((selection) => ({
+      ...selection,
+      [key]: value,
+    }));
+  };
 
-        setSelection(selection => ({
-            ...selection,
-            [key] : value
-        }));
+  const filter = async (event) => {
+    event.preventDefault();
+    const path = [];
+    for (let item in selection) {
+      if (selection[item] !== "") {
+        path.push(`${item}=${selection[item]}`);
+      }
     }
+    history.push(`/classes/?${path.join("&")}`);
+    const response = await fetch(`/classes/?${path.join("&")}`);
+    const data = await response.json();
+    setClasses(data);
+  };
 
-    const filter = async (event) => {
-        event.preventDefault();
-        const path = [];
-        for(let item in selection){
-            if(selection[item] !== ""){
-                path.push(`${item}=${selection[item]}`)
-            }
-        }
-        history.push(`/classes/?${path.join("&")}`);
-        const response = await fetch(`/classes/?${path.join("&")}`);
-        const data = await response.json();
-        setClasses(data);     
-    }
+  const clearFilter = () => {
+    history.push(`/classes`);
+    query = "";
+    setSelection({
+      style: "",
+      day: "",
+    });
+    fetchClasses();
+  };
 
-    const clearFilter = () => {
-        history.push(`/classes`);
-        query = "";
-        setSelection({
-            "style":"",
-            "partner":"",
-            "day": ""
-        })
-        fetchClasses();
-    }
+  return (
+    <div>
+      <h4>Currently Available Classes</h4>
 
-    return (
+      <form onSubmit={filter}>
+        <label htmlFor="style">Style: </label>
+        <select
+          id="style"
+          name="style"
+          value={selection.style}
+          onChange={(e) => handleChange(e)}
+        >
+          <option value="" disabled>
+            Select one
+          </option>
+          {styles.map((c) => (
+            <option key={c.id} value={c.id}>
+              {c.name}
+            </option>
+          ))}
+        </select>
 
-        <div>
-            <h4>Currently Available Classes</h4>
+        <label htmlFor="day"> Weekday: </label>
+        <select
+          id="day"
+          name="day"
+          value={selection.day}
+          onChange={handleChange}
+        >
+          <option value="" disabled>
+            Select one
+          </option>
+          <option value="Monday">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+          <option value="Sunday">Sunday</option>
+        </select>
 
-            <form onSubmit={filter}>
-                <label htmlFor="style">Style: </label>
-                <select id="style" name="style" value={selection.style} onChange={(e) => handleChange(e)}>
-                    <option value="" disabled>Select one</option>
-                    {styles.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
-                </select>
+        <span>
+          <button>Filter</button>
+        </span>
+      </form>
 
-                <label htmlFor="partner">  Partner required: </label>
-                <select id="partner" name="partner" value={selection.partner} onChange={handleChange}>
-                    <option value="" disabled>Select one</option>
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
-                </select>
+      {/* {pathname !== "/classes" && ( */}
+      {query !== "" && (
+        <p>
+          <a href="#" className="filter" onClick={clearFilter}>
+            Clear Filters
+          </a>
+        </p>
+      )}
 
-                <label htmlFor="day">  Weekday: </label>
-                <select id="day" name="day" value={selection.day} onChange={handleChange}>
-                    <option value="" disabled>Select one</option>
-                    <option value="Monday">Monday</option>
-                    <option value="Tuesday">Tuesday</option>
-                    <option value="Wednesday">Wednesday</option>
-                    <option value="Thursday">Thursday</option>
-                    <option value="Friday">Friday</option>
-                    <option value="Saturday">Saturday</option>
-                    <option value="Sunday">Sunday</option>
-                </select>
-
-                <span>
-                    <button>Filter</button> 
-                </span>
-            </form> 
-
-            {/* {pathname !== "/classes" && ( */}
-            {query !== "" && (
+      {classes &&
+        classes.map((c) => {
+          return (
+            <div className="classDisplay" key={c.id}>
+              <div className="left">
+                <img src={`${c.image}`} />
+              </div>
+              <div className="middle">
+                <h3>{c.name}</h3>
                 <p>
-                    <a href="#" className="filter" onClick={clearFilter}>Clear Filters</a>
+                  When: {c.day} at {c.time}
                 </p>
-                )}
-            
-            {classes && (
-                classes.map((c) => {
-                return (
-                <div className="classDisplay" key={c.id}>
-                    <div className="left">
-                        <img src={`${c.image}`}/>
-                    </div>
-                    <div className="middle">
-                        <h3>{c.name}</h3>
-                        <p>When: {c.day} at {c.time}</p>
-                        <p>Where: {c.address}</p>
-                        <p>Partner required: {c.partner?"Yes" : "No"}</p>
-                        <p>Cost: £{c.price}</p>
-                    </div>
-                    <div className="right">
-                        <p>Taught by: {c.instructor}</p>
-                        <img src={`${c.photo}`}/>
-                        <p className="contact"><a href="#">Contact Instructor</a></p>
-                    </div>
-                </div>
-                )})
-            )}
-
-        </div>
-
-    )
+                <p>Where: {c.address}</p>
+                <p>Cost: £{c.price}</p>
+              </div>
+              <div className="right">
+                <p>Taught by: {c.instructor}</p>
+                <img src={`${c.photo}`} />
+                <p className="contact">
+                  <a href="#">Contact Instructor</a>
+                </p>
+              </div>
+            </div>
+          );
+        })}
+    </div>
+  );
 }
