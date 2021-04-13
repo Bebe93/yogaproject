@@ -36,7 +36,7 @@ router.post("/", async function (req, res) {
 
   try {
     const response = await db(
-      `INSERT INTO dance_styles (name, description, image) VALUES ("${name}", "${description}", "${image}");`
+      `INSERT INTO yoga_styles (name, description, image) VALUES ("${name}", "${description}", "${image}");`
     );
     res.send({ message: "style added successfully" });
   } catch (err) {
