@@ -1,12 +1,13 @@
 .App {
   text-align: center;
+  background-color: #ffffff;
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
   max-width: 800px;
   margin: auto;
-
+  background-color: #c2c6f8;
 }
 
 .header {
@@ -21,7 +22,7 @@ body {
 }
 
 nav {
-  background: red;
+  background: #a9d2d9;
   padding: 6px;
 }
 
@@ -29,7 +30,7 @@ nav ul {
   display: flex;
   justify-content: space-evenly;
   padding: 0;
-  margin: 0
+  margin: 0;
 }
 
 nav li {
@@ -38,7 +39,7 @@ nav li {
 }
 
 nav li a {
-  color:white;
+  color: white;
   text-decoration: none;
   font-weight: bold;
 }
@@ -56,14 +57,13 @@ nav li a:hover {
 .stylesDisplay ul {
   list-style-type: none;
   margin: 0;
-  padding:0;
+  padding: 0;
   text-align: left;
 }
 
 .stylesDisplay li a {
-  color:black;
+  color: black;
   text-decoration: none;
-  font-weight: bold;
 }
 
 .stylesDisplay li a:hover {
@@ -73,24 +73,28 @@ nav li a:hover {
 .stylesDisplay img {
   width: 80%;
 }
+.stylesDisplay p {
+  font-weight: bold;
+}
 
-.danceDisplay {
+.yogaDisplay {
   background-color: lightgray;
   width: 80%;
   text-align: left;
   padding: 0 20px;
 }
 
-.danceInfo div {
+.yogaInfo div {
   margin: 20px 0;
 }
 
-.danceDisplay a {
-  color:red;
+.yogaDisplay a {
+  color: red;
   text-decoration: none;
 }
 
-.classDisplay, .instructorDisplay {
+.classDisplay,
+.instructorDisplay {
   display: flex;
   border: 2px solid lightgrey;
   border-radius: 2em;
@@ -117,7 +121,6 @@ nav li a:hover {
   flex-basis: 25%;
   align-self: center;
   align-content: center;
-
 }
 
 .right img {
@@ -126,7 +129,8 @@ nav li a:hover {
   border: 2px solid black;
 }
 
-.contact a, .filter {
+.contact a,
+.filter {
   font-size: 12px;
   color: red;
 }
@@ -134,16 +138,3 @@ nav li a:hover {
 form span {
   padding-left: 10px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

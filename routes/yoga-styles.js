@@ -51,7 +51,7 @@ router.put("/:id", async function (req, res) {
     const currRecord = await db(`SELECT * FROM yoga_styles WHERE id="${id}";`);
     const newRecord = { ...currRecord, ...req.body };
     const response = await db(
-      `UPDATE yoga_styles SET name="${newRecord.name}", description="${newRecord.description}" WHERE id="${id}";`
+      `UPDATE yoga_styles SET name="${newRecord.name}", description="${newRecord.description}", image="${newRecord.image}" WHERE id="${id}";`
     );
     res.send({ message: "Record updated successfully" });
   } catch (err) {

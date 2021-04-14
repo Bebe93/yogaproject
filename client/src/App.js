@@ -11,9 +11,9 @@ function App() {
     <Router>
       <div className="App">
         <div className="header">
-          <img src="lotus.png" alt="" />
+          <img src="lotus.png" alt="" className="ms-2" />
           <h1>YOGA</h1>
-          <img src="/back-warrior.png" alt="" />
+          <img src="/back-warrior.png" alt="" className="me-2" />
         </div>
 
         <div>

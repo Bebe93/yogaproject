@@ -80,7 +80,7 @@ export default function Classes() {
 
   return (
     <div>
-      <h4>Currently Available Classes</h4>
+      <h4 className="mt-2">Currently Available Classes</h4>
 
       <form onSubmit={filter}>
         <label htmlFor="style">Style: </label>

@@ -3,7 +3,7 @@ import React from "react";
 export default function Home() {
   return (
     <div>
-      <h2>Welcome!</h2>
+      <h2 className="mt-2">Welcome!</h2>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -14,7 +14,7 @@ export default function Home() {
         mollit anim id est laborum.
       </p>
 
-      <img src="/blog-yoga.png" alt="" class="img-fluid rounded-3"></img>
+      <img src="/blog-yoga.png" alt="" className="img-fluid rounded-3"></img>
     </div>
   );
 }

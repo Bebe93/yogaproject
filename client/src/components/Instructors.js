@@ -15,7 +15,7 @@ export default function Instructors() {
 
   return (
     <div>
-      <h4>Current Teachers</h4>
+      <h4 className="mt-2">Current Teachers</h4>
 
       {instructors &&
         instructors.map((i) => {
