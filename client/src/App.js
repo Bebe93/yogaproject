@@ -5,6 +5,7 @@ import Yogastyles from "./components/Yogastyles";
 import Instructors from "./components/Instructors";
 import Home from "./components/Home";
 import Classes from "./components/Classes";
+import InstructorsLogin from "./components/InstructorsLogin";
 
 function App() {
   return (
@@ -46,6 +47,9 @@ function App() {
             <Route path="/instructors">
               <Instructors />
             </Route>
+            <Route path="/instructorslogin">
+              <InstructorsLogin />
+            </Route>
             <Route path="/">
               <Home />
             </Route>
@@ -59,7 +63,7 @@ function App() {
                 <Link to="#">Admin Login</Link>
               </li>
               <li>
-                <Link to="#">Instructor Login</Link>
+                <Link to="/instructorslogin">Instructor Login</Link>
               </li>
             </ul>
           </nav>
