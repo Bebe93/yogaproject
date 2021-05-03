@@ -11,7 +11,7 @@ export default function Yogastyles() {
   const [yogaStyles, setYogaStyles] = useState([]);
 
   const fetchYogaInfo = async () => {
-    const response = await fetch("/yogastyles");
+    const response = await fetch("/yoga-styles");
     const data = await response.json();
     setYogaStyles(data);
   };
@@ -40,7 +40,7 @@ export default function Yogastyles() {
           <YogaDisplay />
         </Route>
         <Route path="/">
-          <img src="/Sports-Yoga.png" class="img-fluid" alt=""></img>
+          <img src="/Sports-Yoga.png" className="img-fluid" alt=""></img>
         </Route>
       </Switch>
     </div>

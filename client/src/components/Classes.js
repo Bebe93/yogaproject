@@ -138,7 +138,7 @@ export default function Classes() {
           return (
             <div className="classDisplay" key={c.id}>
               <div className="left">
-                <img src={`${c.image}`} />
+                <img src={`${c.image}`} alt="" />
               </div>
               <div className="middle">
                 <h3>{c.name}</h3>
@@ -150,7 +150,7 @@ export default function Classes() {
               </div>
               <div className="right">
                 <p>Taught by: {c.instructor}</p>
-                <img src={`${c.photo}`} />
+                <img src={`${c.photo}`} alt="" />
                 <p className="contact">
                   <a href="#">Contact Instructor</a>
                 </p>
