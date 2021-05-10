@@ -6,6 +6,7 @@ import Instructors from "./components/Instructors";
 import Home from "./components/Home";
 import Classes from "./components/Classes";
 import InstructorsLogin from "./components/InstructorsLogin";
+import InstructorsRegister from "./components/InstructorsRegister";
 
 function App() {
   return (
@@ -50,6 +51,9 @@ function App() {
             <Route path="/instructorslogin">
               <InstructorsLogin />
             </Route>
+            <Route path="/instructorsregister">
+              <InstructorsRegister />
+            </Route>
             <Route path="/">
               <Home />
             </Route>
@@ -61,6 +65,9 @@ function App() {
             <ul>
               <li>
                 <Link to="#">Admin Login</Link>
+              </li>
+              <li>
+                <Link to="/instructorsregister">Register as an Instructor</Link>
               </li>
               <li>
                 <Link to="/instructorslogin">Instructor Login</Link>

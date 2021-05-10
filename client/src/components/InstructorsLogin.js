@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "../App.css";
+import axios from "axios";
 
 export default function InstructorsLogin() {
   const [instructor, setInstructor] = useState({
@@ -9,6 +10,19 @@ export default function InstructorsLogin() {
   });
 
   let history = useHistory();
+
+  const login = () => {
+    axios
+      .post("/intructors/login", instructor)
+      .then((result) => {
+        //store it locally
+        localStorage.setItem("token", result.data.token);
+
+        history.push("/");
+        console.log(result.data.message, result.data.token);
+      })
+      .catch((error) => console.log(error));
+  };
 
   const handleChange = (e) => {
     e.persist();
@@ -41,7 +55,9 @@ export default function InstructorsLogin() {
           />
         </label>
         <br />
-        <button className="btn mt-2 mx-3">Login</button>
+        <button className="btn mt-2 mx-3" onClick={login}>
+          Login
+        </button>
       </form>
     </div>
   );

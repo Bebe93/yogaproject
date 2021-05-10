@@ -11,7 +11,7 @@ export default function Yogastyles() {
   const [yogaStyles, setYogaStyles] = useState([]);
 
   const fetchYogaInfo = async () => {
-    const response = await fetch("/yoga-styles");
+    const response = await fetch("/yogastyles");
     const data = await response.json();
     setYogaStyles(data);
   };
