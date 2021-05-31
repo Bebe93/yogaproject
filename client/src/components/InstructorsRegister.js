@@ -10,6 +10,7 @@ export default function Register() {
     password: "",
     photo: "",
   });
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const history = useHistory();
 
@@ -26,9 +27,36 @@ export default function Register() {
     addInstructor();
   };
 
+  const onFileUpload = async () => {
+    const formData = new FormData();
+    formData.append("imagefile", selectedFile, selectedFile.name);
+
+    try {
+      const res = await axios.post("/images", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const addInstructor = async () => {
     const { name, email, password, photo } = instructor;
+    const formData = new FormData();
+    formData.append("imagefile", selectedFile, selectedFile.name);
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("password", password);
     try {
+      const res = await axios.post(`/instructor`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(res);
       const instructor = await axios.post("/instructor/register", {
         name,
         email,
@@ -41,6 +69,10 @@ export default function Register() {
       console.log(error);
     }
   };
+
+  // const onFileChange = (e) => {
+  //   setSelectedFile(e.target.files[0]);
+  // };
 
   return (
     <div className="registerForm">
@@ -83,13 +115,13 @@ export default function Register() {
           />
         </label>
         <br />
-        <label className="form-label" htmlFor="username">
-          Photo
+        <label className="form-label" htmlFor="photo">
+          Upload a picture
           <input
-            onChange={handleChange}
+            onChange={onFileUpload}
             name=""
             value={instructor.photo}
-            type="text"
+            type="file"
             id=""
             className="form-control"
           />

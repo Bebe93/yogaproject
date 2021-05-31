@@ -40,7 +40,7 @@ export default function Yogastyles() {
           <YogaDisplay />
         </Route>
         <Route path="/">
-          <img src="/Sports-Yoga.png" className="img-fluid" alt=""></img>
+          <img src="./Sports-Yoga.png" className="img-fluid" alt=""></img>
         </Route>
       </Switch>
     </div>
